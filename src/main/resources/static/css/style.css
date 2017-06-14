@@ -1,0 +1,15 @@
+body {
+    padding-top: 80px;
+}
+
+h2, h4 {
+    text-align: center;
+}
+
+h2 {
+    padding-bottom: 15px;
+}
+
+h4 {
+    padding-bottom: 40px;
+}
