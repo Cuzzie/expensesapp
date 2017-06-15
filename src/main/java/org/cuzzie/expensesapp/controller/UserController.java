@@ -29,9 +29,9 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping("/createUser")
+    @GetMapping("/createuser")
     public String createUser() {
-        return "createUser";
+        return "createuser";
     }
 
 }
