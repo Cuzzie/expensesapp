@@ -45,6 +45,10 @@ h4 {
     min-height: 100vh;
 }
 
+.main-body a {
+    margin-bottom: 20px;
+}
+
 .main-body .main-body-logo {
     text-align: center;
 }
