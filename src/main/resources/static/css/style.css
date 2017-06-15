@@ -1,8 +1,19 @@
 body {
     padding-top: 80px;
-    background: #FFEEEE;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #DDEFBB, #FFEEEE);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #DDEFBB, #FFEEEE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #5CBF98;  /* fallback for old browsers */
+    background: linear-gradient(55deg, #4E75B9 30%, #5CBF98 90%);
+    background-attachment: fixed;
+    padding-bottom: 40px;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Titillium Web', sans-serif;
+    line-height: 1.2em;
+}
+
+p, th, td {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.2em;
 }
 
 h2, h4 {
@@ -11,8 +22,38 @@ h2, h4 {
 
 h2 {
     padding-bottom: 15px;
+    font-size: 52px;
 }
 
 h4 {
     padding-bottom: 40px;
+    font-size: 22px;
+}
+
+.main-body {
+    background: #fff;
+    padding: 60px 50px;
+    /*position: absolute;*/
+    box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-height: 100vh;
+}
+
+.main-body .main-body-logo {
+    text-align: center;
+}
+
+.main-body .main-body-logo .main-body-text p {
+    font-family: "Courgette", sans-serif !important;
+    font-weight: 700;
+    font-size: 100px;
+    color: #000;
+    padding-bottom: 50px;
+    display: inline-block;
 }
