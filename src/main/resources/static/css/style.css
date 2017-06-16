@@ -21,7 +21,7 @@ h2, h4 {
 }
 
 h2 {
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     font-size: 52px;
 }
 
@@ -60,4 +60,20 @@ h4 {
     color: #000;
     padding-bottom: 50px;
     display: inline-block;
+}
+
+.table-action form {
+    display: inline-flex;
+}
+
+.table-action p {
+    display: inline;
+}
+
+.form-check {
+    margin-bottom: 15px;
+}
+
+.form-check .my-checkbox {
+    padding-top: 7px;
 }

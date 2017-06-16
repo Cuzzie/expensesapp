@@ -6,11 +6,10 @@ import org.cuzzie.expensesapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,9 +38,18 @@ public class UserController {
     }
 
     @PostMapping("/addnewuser")
-    public String addNewUser(@ModelAttribute User user) {
+    public String addNewUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "addnewuser";
+        }
         userService.createUser(user);
-        return "redirect:/admin/users";
+        return "redirect:/admin/users?success_add=true";
+    }
+
+    @PostMapping("/deleteuser/{userId}")
+    public String deleteUser(@PathVariable int userId) {
+        userService.deleteUser(userId);
+        return "redirect:/admin/users?success_delete=true";
     }
 
 }

@@ -13,6 +13,14 @@
     <div id="main-body" class="main-body users">
         <h2 th:text="#{admin.users.title}">USERS</h2>
         <h4 th:text="#{admin.users.subtitle}">List of users</h4>
+        <div class="alert alert-success" th:if="${(param.success_add != null) and (param.success_add[0] == 'true')}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p th:text="#{global.success.record_added}">Record added successfully!</p>
+        </div>
+        <div class="alert alert-success" th:if="${(param.success_delete != null) and (param.success_delete[0] == 'true')}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p th:text="#{global.success.record_deleted}">Record deleted successfully!</p>
+        </div>
         <div class="container">
             <div class="row">
                 <a href="/admin/addnewuser" th:href="@{/admin/addnewuser}"
@@ -31,6 +39,8 @@
                         <th th:text="#{admin.users.table.header.dob}">Date of Birth</th>
                         <th th:text="#{admin.users.table.header.age}">Age</th>
                         <th th:text="#{admin.users.table.header.address}">Address</th>
+                        <th th:text="#{admin.users.table.header.isAdmin}">Is Administrator?</th>
+                        <th th:text="#{global.table.header.action}">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,6 +51,23 @@
                         <td th:text="${#dates.format(user.dob, 'dd-MMM-yyyy')}">dob</td>
                         <td th:text="${user.age}">age</td>
                         <td th:text="${user.address}">address</td>
+                        <td th:text="${user.isAdmin ? 'Yes' : 'No'}">isAdmin</td>
+                        <td>
+                            <div class="table-action">
+                                <form action="#" th:action="@{/admin/edituser/} + ${{user.id}}" method="post">
+                                    <button class="btn btn-default btn-md">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                        <p th:text="#{global.table.action.edit}" />
+                                    </button>
+                                </form>
+                                <form action="#" th:action="@{/admin/deleteuser/} + ${{user.id}}" method="post">
+                                    <button class="btn btn-default btn-md">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                        <p th:text="#{global.table.action.delete}" />
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

@@ -3,6 +3,7 @@ package org.cuzzie.expensesapp.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -13,9 +14,13 @@ import java.util.Date;
 public class User extends BaseModel{
 
     @Column(name = "firstname")
+    @Basic(optional = false)
+    @NotNull
     private String firstName;
 
     @Column(name = "lastname")
+    @Basic(optional = false)
+    @NotNull
     private String lastName;
 
     @Column(name = "age")
@@ -25,20 +30,27 @@ public class User extends BaseModel{
     private String address;
 
     @Column(name = "dob")
+    @Basic(optional = false)
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dob;
 
+    @Column(name = "isadmin")
+    @Basic(optional = false)
+    private Boolean isAdmin;
+
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, int age, String address, Date dob) {
+    public User(int id, String firstName, String lastName, int age, String address, Date dob, Boolean isAdmin) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.address = address;
         this.dob = dob;
+        this.isAdmin = isAdmin;
     }
 
     public String getFirstName() {
@@ -79,5 +91,13 @@ public class User extends BaseModel{
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 }

@@ -9,6 +9,7 @@ public class UserBuilder {
     private int age;
     private String address;
     private Date dob;
+    private Boolean isAdmin;
 
     public UserBuilder setId(int id) {
         this.id = id;
@@ -40,7 +41,12 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
+        return this;
+    }
+
     public User createUser() {
-        return new User(id, firstName, lastName, age, address, dob);
+        return new User(id, firstName, lastName, age, address, dob, isAdmin);
     }
 }
