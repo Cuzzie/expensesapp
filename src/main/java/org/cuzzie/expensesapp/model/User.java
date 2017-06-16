@@ -1,5 +1,7 @@
 package org.cuzzie.expensesapp.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -23,21 +25,19 @@ public class User extends BaseModel{
     private String address;
 
     @Column(name = "dob")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dob;
 
     public User() {
     }
 
-    public User(int id) {
-        super(id);
-    }
-
-    public User(int id, String firstName, String lastName, int age, Date dob) {
+    public User(int id, String firstName, String lastName, int age, String address, Date dob) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.address = address;
         this.dob = dob;
     }
 
