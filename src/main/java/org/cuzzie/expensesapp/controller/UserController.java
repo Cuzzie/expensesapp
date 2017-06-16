@@ -42,8 +42,24 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "addnewuser";
         }
-        userService.createUser(user);
+        userService.saveUser(user);
         return "redirect:/admin/users?success_add=true";
+    }
+
+    @GetMapping("/edituser/{userId}")
+    public String editUser(@PathVariable int userId, Model model) {
+        User user = userService.findUserById(userId);
+        model.addAttribute("user", user);
+        return "edituser";
+    }
+
+    @PostMapping("/edituser")
+    public String editUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "edituser";
+        }
+        userService.saveUser(user);
+        return "redirect:/admin/users?success_update=true";
     }
 
     @PostMapping("/deleteuser/{userId}")

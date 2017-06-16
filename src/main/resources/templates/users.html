@@ -17,6 +17,10 @@
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <p th:text="#{global.success.record_added}">Record added successfully!</p>
         </div>
+        <div class="alert alert-success" th:if="${(param.success_update != null) and (param.success_update[0] == 'true')}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p th:text="#{global.success.record_updated}">Record updated successfully!</p>
+        </div>
         <div class="alert alert-success" th:if="${(param.success_delete != null) and (param.success_delete[0] == 'true')}">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <p th:text="#{global.success.record_deleted}">Record deleted successfully!</p>
@@ -54,7 +58,7 @@
                         <td th:text="${user.isAdmin ? 'Yes' : 'No'}">isAdmin</td>
                         <td>
                             <div class="table-action">
-                                <form action="#" th:action="@{/admin/edituser/} + ${{user.id}}" method="post">
+                                <form action="#" th:action="@{/admin/edituser/} + ${{user.id}}" method="get">
                                     <button class="btn btn-default btn-md">
                                         <i class="glyphicon glyphicon-edit"></i>
                                         <p th:text="#{global.table.action.edit}" />

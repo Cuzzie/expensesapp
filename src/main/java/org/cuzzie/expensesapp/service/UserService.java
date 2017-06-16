@@ -11,7 +11,9 @@ public interface UserService {
 
     List<User> findAllUsers();
 
-    void createUser(User user);
+    User findUserById(int userId);
+
+    void saveUser(User user);
 
     void deleteUser(int userId);
 

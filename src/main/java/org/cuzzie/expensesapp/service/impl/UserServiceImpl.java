@@ -23,7 +23,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void createUser(User user) {
+    public User findUserById(int userId) {
+        return userRepository.findOne(userId);
+    }
+
+    @Override
+    public void saveUser(User user) {
         userRepository.save(user);
     }
 

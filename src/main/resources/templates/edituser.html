@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette|Roboto|Titillium+Web" />
+</head>
+<body>
+    <div th:replace="fragments/header :: header" />
+
+    <div id="main-body" class="main-body edit-user">
+        <h2 th:text="#{admin.edituser.title}">Edit User</h2>
+        <h4 th:text="#{admin.edituser.subtitle}">Update user details</h4>
+        <div class="container">
+            <form class="form-horizontal" action="/admin/edituser" th:action="@{/admin/edituser}" th:object="${user}" method="post">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                    <p th:text="#{global.error.enter_mandatory_fields}">Please fill in the mandatory fields!</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="userid" th:text="#{admin.addnewuser.label.id}">ID</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="userid" placeholder="ID" th:field="*{id}" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="firstname" th:text="#{admin.addnewuser.label.firstname}">First Name</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="firstname" placeholder="First Name" th:field="*{firstName}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="lastname" th:text="#{admin.addnewuser.label.lastname}">Last Name</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="lastname" placeholder="Last Name" th:field="*{lastName}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="address" th:text="#{admin.addnewuser.label.address}">Address</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="address" placeholder="Address" th:field="*{address}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="dob" th:text="#{admin.addnewuser.label.dob}">Date of birth</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="date" class="form-control" id="dob" placeholder="Date of birth" th:field="*{dob}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="age" th:text="#{admin.addnewuser.label.age}">Age</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="number" class="form-control" id="age" placeholder="Age" th:field="*{age}" />
+                    </div>
+                </div>
+                <div class="form-check row">
+                    <div class="col-md-2 control-label">
+                        <label for="isAdmin" th:text="#{admin.addnewuser.label.isAdmin}">Is administrator?</label>
+                    </div>
+                    <div class="col-md-10 my-checkbox">
+                        <input type="checkbox" class="form-check-input" id="isAdmin" th:field="*{isAdmin}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-primary" th:text="#{admin.addnewuser.button.submit}">Submit</button>
+                        <button type="reset" class="btn btn-default" th:text="#{admin.addnewuser.button.reset}">Reset</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
