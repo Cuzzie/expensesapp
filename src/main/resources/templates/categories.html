@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Users</title>
+    <title>Categories</title>
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette|Roboto|Titillium+Web" />
@@ -10,9 +10,9 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-    <div id="main-body" class="main-body users">
-        <h2 th:text="#{admin.users.title}">USERS</h2>
-        <h4 th:text="#{admin.users.subtitle}">List of users</h4>
+    <div id="main-body" class="main-body categories">
+        <h2 th:text="#{admin.categories.title}">CATEGORIES</h2>
+        <h4 th:text="#{admin.categories.subtitle}">List of categories</h4>
         <div class="alert alert-success" th:if="${(param.success_add != null) and (param.success_add[0] == 'true')}">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <p th:text="#{global.success.record_added}">Record added successfully!</p>
@@ -27,9 +27,9 @@
         </div>
         <div class="container">
             <div class="row">
-                <a href="/admin/addnewuser" th:href="@{/admin/addnewuser}"
+                <a href="/admin/addnewcategory" th:href="@{/admin/addnewcategory}"
                    class="btn btn-primary btn-md pull-right"
-                   th:text="#{admin.users.button.addnewuser}">Add new user</a>
+                   th:text="#{admin.categories.button.addnewcategory}">Add new category</a>
             </div>
         </div>
         <div class="container">
@@ -37,34 +37,26 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
-                        <th th:text="#{admin.users.table.header.id}">ID</th>
-                        <th th:text="#{admin.users.table.header.firstname}">First Name</th>
-                        <th th:text="#{admin.users.table.header.lastname}">Last Name</th>
-                        <th th:text="#{admin.users.table.header.dob}">Date of Birth</th>
-                        <th th:text="#{admin.users.table.header.address}">Address</th>
-                        <th th:text="#{admin.users.table.header.country}">Country</th>
-                        <th th:text="#{admin.users.table.header.isAdmin}">Is Administrator?</th>
+                        <th th:text="#{admin.categories.table.header.id}">ID</th>
+                        <th th:text="#{admin.categories.table.header.name}">Name</th>
+                        <th th:text="#{admin.categories.table.header.type}">Type</th>
                         <th th:text="#{global.table.header.action}">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user : ${allUsers}">
-                        <td th:text="${user.id}">ID</td>
-                        <td th:text="${user.firstName}">firstName</td>
-                        <td th:text="${user.lastName}">lastName</td>
-                        <td th:text="${#dates.format(user.dob, 'dd-MMM-yyyy')}">dob</td>
-                        <td th:text="${user.address}">address</td>
-                        <td th:text="${user.country}">country</td>
-                        <td th:text="${user.isAdmin ? 'Yes' : 'No'}">isAdmin</td>
+                    <tr th:each="category : ${allCategories}">
+                        <td th:text="${category.id}">ID</td>
+                        <td th:text="${category.name}">name</td>
+                        <td th:text="${category.type}">type</td>
                         <td>
                             <div class="table-action">
-                                <form action="#" th:action="@{/admin/edituser/} + ${{user.id}}" method="get">
+                                <form action="#" th:action="@{/admin/editcategory/} + ${{category.id}}" method="get">
                                     <button class="btn btn-default btn-md">
                                         <i class="glyphicon glyphicon-edit"></i>
                                         <p th:text="#{global.table.action.edit}" />
                                     </button>
                                 </form>
-                                <form action="#" th:action="@{/admin/deleteuser/} + ${{user.id}}" method="post">
+                                <form action="#" th:action="@{/admin/deletecategory/} + ${{category.id}}" method="post">
                                     <button class="btn btn-default btn-md">
                                         <i class="glyphicon glyphicon-remove"></i>
                                         <p th:text="#{global.table.action.delete}" />

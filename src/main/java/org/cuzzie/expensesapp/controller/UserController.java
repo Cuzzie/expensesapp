@@ -10,9 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Cuzzie on 6/14/2017.
@@ -23,6 +22,16 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @ModelAttribute("allCountries")
+    public List<String> allCountries() {
+        String[] countryCodes = Locale.getISOCountries();
+        List<String> allCountries = Arrays.stream(countryCodes)
+                .map(countryCode -> new Locale("", countryCode))
+                .map(Locale::getDisplayCountry)
+                .collect(Collectors.toList());
+        return allCountries;
+    }
 
     @GetMapping("/users")
     public String users(Model model) {

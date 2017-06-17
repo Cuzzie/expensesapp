@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <div class="navbar navbar-default navbar-fixed-top" th:fragment="header">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -25,7 +25,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="/admin/users" th:href="@{/admin/users}">Users</a>
+                                <a href="/admin/users" th:href="@{/admin/users}" th:text="#{menu.item.admin.users}">Users</a>
+                            </li>
+                            <li>
+                                <a href="/admin/categories" th:href="@{/admin/categories}" th:text="#{menu.item.admin.categories}">Categories</a>
                             </li>
                         </ul>
                     </li>

@@ -44,18 +44,21 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-2 control-label">
-                        <label for="dob" th:text="#{admin.addnewuser.label.dob}">Date of birth</label>
+                        <label for="country" th:text="#{admin.addnewuser.label.country}">Country</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="date" class="form-control" id="dob" placeholder="Date of birth" th:field="*{dob}" />
+                        <select id="country" class="form-control" th:field="*{country}">
+                            <option value="" th:text="#{global.select.option.name('country')}" />
+                            <option th:each="country : ${allCountries}" th:value="${country}" th:text="${country}" />
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-2 control-label">
-                        <label for="age" th:text="#{admin.addnewuser.label.age}">Age</label>
+                        <label for="dob" th:text="#{admin.addnewuser.label.dob}">Date of birth</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="number" class="form-control" id="age" placeholder="Age" th:field="*{age}" />
+                        <input type="date" class="form-control" id="dob" placeholder="Date of birth" th:field="*{dob}" />
                     </div>
                 </div>
                 <div class="form-check row">

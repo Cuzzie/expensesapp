@@ -23,11 +23,11 @@ public class User extends BaseModel{
     @NotNull
     private String lastName;
 
-    @Column(name = "age")
-    private int age;
-
     @Column(name = "address")
     private String address;
+
+    @Column(name = "country")
+    private String country;
 
     @Column(name = "dob")
     @Basic(optional = false)
@@ -43,12 +43,12 @@ public class User extends BaseModel{
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, int age, String address, Date dob, Boolean isAdmin) {
+    public User(int id, String firstName, String lastName, String address, String country, Date dob, Boolean isAdmin) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
         this.address = address;
+        this.country = country;
         this.dob = dob;
         this.isAdmin = isAdmin;
     }
@@ -69,20 +69,20 @@ public class User extends BaseModel{
         this.lastName = lastName;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Date getDob() {

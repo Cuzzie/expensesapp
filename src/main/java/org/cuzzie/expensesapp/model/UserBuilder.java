@@ -6,8 +6,8 @@ public class UserBuilder {
     private int id;
     private String firstName;
     private String lastName;
-    private int age;
     private String address;
+    private String country;
     private Date dob;
     private Boolean isAdmin;
 
@@ -26,13 +26,13 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setAge(int age) {
-        this.age = age;
+    public UserBuilder setAddress(String address) {
+        this.address = address;
         return this;
     }
 
-    public UserBuilder setAddress(String address) {
-        this.address = address;
+    public UserBuilder setCountry(String country) {
+        this.country = country;
         return this;
     }
 
@@ -47,6 +47,6 @@ public class UserBuilder {
     }
 
     public User createUser() {
-        return new User(id, firstName, lastName, age, address, dob, isAdmin);
+        return new User(id, firstName, lastName, address, country, dob, isAdmin);
     }
 }
