@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette|Roboto|Titillium+Web" />
+</head>
+<body>
+    <div th:replace="fragments/header :: header" />
+
+    <div id="main-body" class="main-body create-category">
+        <h2 th:text="#{admin.editcategory.title}">Create Category</h2>
+        <h4 th:text="#{admin.editcategory.subtitle}">Enter new category details</h4>
+        <div class="container">
+            <form class="form-horizontal" action="/admin/addnewcategory" th:action="@{/admin/addnewcategory}" th:object="${category}" method="post">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                    <p th:text="#{global.error.enter_mandatory_fields}">Please fill in the mandatory fields!</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="categoryid" th:text="#{admin.addnewcategory.label.id}">ID</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="categoryid" placeholder="ID" th:field="*{id}" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="name" th:text="#{admin.addnewcategory.label.name}">Name</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="type" th:text="#{admin.addnewcategory.label.type}">Type</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select id="type" class="form-control" th:field="*{type}">
+                            <option value="" th:text="#{global.select.option.name('type')}" />
+                            <option th:each="type : ${T(org.cuzzie.expensesapp.Constant.CategoryType).values()}"
+                                    th:value="${type.name()}"
+                                    th:text="${type.displayName}" />
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-primary" th:text="#{global.button.submit}">Submit</button>
+                        <button type="reset" class="btn btn-default" th:text="#{global.button.reset}">Reset</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

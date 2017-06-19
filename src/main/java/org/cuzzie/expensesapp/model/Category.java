@@ -20,6 +20,9 @@ public class Category extends BaseModel{
     @NotNull
     private String type;
 
+    public Category() {
+    }
+
     public Category(String name, String type) {
         this.name = name;
         this.type = type;
