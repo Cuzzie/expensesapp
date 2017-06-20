@@ -1,30 +1,12 @@
 package org.cuzzie.expensesapp;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * Created by Cuzzie on 6/20/2017.
  */
 public class Constant {
-
-//    public enum CategoryType {
-//        I("Income"),
-//        E("Expense");
-//
-//        private final String displayName;
-//
-//        CategoryType(String displayName) {
-//            this.displayName = displayName;
-//        }
-//
-//        public String getDisplayName() {
-//            return displayName;
-//        }
-//
-//        public String getDisplayNameByValue(String value) {
-//            return "";
-//        }
-//    }
 
     public enum CategoryType {
         INCOME("I"),
@@ -38,6 +20,11 @@ public class Constant {
 
         public String getValue() {
             return value;
+        }
+
+        public static String getNameByValue(String value) {
+            Optional<CategoryType> categoryType = Arrays.stream(CategoryType.values()).filter(ct -> value.equals(ct.getValue())).findFirst();
+            return categoryType.map(CategoryType::name).orElse("");
         }
     }
 
