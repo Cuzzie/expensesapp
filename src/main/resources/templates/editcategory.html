@@ -14,7 +14,7 @@
         <h2 th:text="#{admin.editcategory.title}">Create Category</h2>
         <h4 th:text="#{admin.editcategory.subtitle}">Enter new category details</h4>
         <div class="container">
-            <form class="form-horizontal" action="/admin/addnewcategory" th:action="@{/admin/addnewcategory}" th:object="${category}" method="post">
+            <form class="form-horizontal" action="/admin/editcategory" th:action="@{/admin/editcategory}" th:object="${category}" method="post">
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                     <p th:text="#{global.error.enter_mandatory_fields}">Please fill in the mandatory fields!</p>
                 </div>
