@@ -77,3 +77,11 @@ h4 {
 .form-check .my-checkbox {
     padding-top: 7px;
 }
+
+.password-error {
+    display: none;
+}
+
+.password-error p {
+    color: red;
+}

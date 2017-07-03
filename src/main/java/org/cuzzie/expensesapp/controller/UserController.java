@@ -4,6 +4,7 @@ import org.cuzzie.expensesapp.model.User;
 import org.cuzzie.expensesapp.model.UserBuilder;
 import org.cuzzie.expensesapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @ModelAttribute("allCountries")
     public List<String> allCountries() {
@@ -51,6 +55,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "addnewuser";
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
         return "redirect:/admin/users?success_add=true";
     }
@@ -67,6 +72,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "edituser";
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
         return "redirect:/admin/users?success_update=true";
     }
