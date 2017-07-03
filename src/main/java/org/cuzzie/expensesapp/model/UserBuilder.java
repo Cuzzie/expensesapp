@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class UserBuilder {
     private int id;
+    private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private String address;
@@ -13,6 +15,16 @@ public class UserBuilder {
 
     public UserBuilder setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public UserBuilder setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public UserBuilder setPassword(String password) {
+        this.password = password;
         return this;
     }
 
@@ -47,6 +59,6 @@ public class UserBuilder {
     }
 
     public User createUser() {
-        return new User(id, firstName, lastName, address, country, dob, isAdmin);
+        return new User(id, username, password, firstName, lastName, address, country, dob, isAdmin);
     }
 }

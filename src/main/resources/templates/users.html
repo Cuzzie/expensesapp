@@ -38,6 +38,7 @@
                     <thead>
                     <tr>
                         <th th:text="#{admin.users.table.header.id}">ID</th>
+                        <th th:text="#{admin.users.table.header.username}">Username</th>
                         <th th:text="#{admin.users.table.header.firstname}">First Name</th>
                         <th th:text="#{admin.users.table.header.lastname}">Last Name</th>
                         <th th:text="#{admin.users.table.header.dob}">Date of Birth</th>
@@ -50,6 +51,7 @@
                     <tbody>
                     <tr th:each="user : ${allUsers}">
                         <td th:text="${user.id}">ID</td>
+                        <td th:text="${user.username}">Username</td>
                         <td th:text="${user.firstName}">firstName</td>
                         <td th:text="${user.lastName}">lastName</td>
                         <td th:text="${#dates.format(user.dob, 'dd-MMM-yyyy')}">dob</td>
