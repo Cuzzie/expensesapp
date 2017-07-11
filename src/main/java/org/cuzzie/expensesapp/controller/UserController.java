@@ -24,9 +24,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @ModelAttribute("allCountries")
     public List<String> allCountries() {
         String[] countryCodes = Locale.getISOCountries();
@@ -55,7 +52,6 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "addnewuser";
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
         return "redirect:/admin/users?success_add=true";
     }
@@ -72,7 +68,6 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "edituser";
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
         return "redirect:/admin/users?success_update=true";
     }

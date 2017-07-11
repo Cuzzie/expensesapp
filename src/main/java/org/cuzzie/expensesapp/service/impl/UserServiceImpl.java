@@ -4,6 +4,7 @@ import org.cuzzie.expensesapp.model.User;
 import org.cuzzie.expensesapp.repository.UserRepository;
 import org.cuzzie.expensesapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,9 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public List<User> findAllUsers() {
         return (List<User>) userRepository.findAll();
@@ -29,6 +33,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
