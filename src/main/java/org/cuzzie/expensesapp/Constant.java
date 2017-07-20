@@ -28,5 +28,9 @@ public class Constant {
         }
     }
 
+    public static final String SEC_ROLE_PREFIX = "ROLE_";
 
+    public static final String SEC_ADMIN = "ADMIN";
+
+    public static final String SEC_USER = "USER";
 }

@@ -1,9 +1,13 @@
 package org.cuzzie.expensesapp.service.impl;
 
+import org.cuzzie.expensesapp.model.MyUserPrincipal;
 import org.cuzzie.expensesapp.model.User;
 import org.cuzzie.expensesapp.repository.UserRepository;
 import org.cuzzie.expensesapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +44,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(int userId) {
         userRepository.delete(userId);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new MyUserPrincipal(user);
     }
 }

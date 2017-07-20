@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Cuzzie on 6/18/2017.
  */
-@Service
+@Service("transactionService")
 public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
@@ -29,7 +29,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> findTop10Transactions() {
-        return transactionRepository.findTop10OrderByDateDesc();
+        return null;
+        //        return transactionRepository.findTop10OrderByDate();
     }
 
     @Override
