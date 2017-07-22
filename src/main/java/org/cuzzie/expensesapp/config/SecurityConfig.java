@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.csrf().disable();
         http.formLogin().loginPage("/login").permitAll()
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole(Constant.SEC_ADMIN)

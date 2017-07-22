@@ -103,3 +103,13 @@ h4 {
     text-align: center;
     margin-top: 10px;
 }
+
+.logout-text {
+    color: darkgreen;
+    text-align: center;
+}
+
+.error-text {
+    color: red;
+    text-align: center;
+}

@@ -15,6 +15,12 @@
         <h2 th:text="#{login.title}">Login</h2>
         <h4 th:text="#{login.subtitle}">Enter your credentials</h4>
         <div class="container">
+            <div th:if="${param.logout}">
+                <p class="logout-text" th:text="#{login.logout}">You have been logged out.</p>
+            </div>
+            <div th:if="${param.error}">
+                <p class="error-text" th:text="#{login.error}">Wrong username of password! Please try again.</p>
+            </div>
             <form class="form-horizontal" action="/login" th:action="@{/login}" method="post">
                 <div class="form-group">
                     <div class="col-md-4 control-label">
