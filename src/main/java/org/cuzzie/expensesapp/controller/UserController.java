@@ -44,13 +44,13 @@ public class UserController {
     @GetMapping("/addnewuser")
     public String addNewUser(Model model) {
         model.addAttribute("user", new UserBuilder().createUser());
-        return "admin/addnewuser";
+        return "addnewuser";
     }
 
     @PostMapping("/addnewuser")
     public String addNewUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "admin/addnewuser";
+            return "addnewuser";
         }
         userService.saveUser(user);
         return "redirect:/admin/users?success_add=true";
