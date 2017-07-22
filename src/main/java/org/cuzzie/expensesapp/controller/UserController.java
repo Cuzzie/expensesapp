@@ -38,19 +38,19 @@ public class UserController {
     public String users(Model model) {
         List<User> allUsers = userService.findAllUsers();
         model.addAttribute("allUsers", allUsers);
-        return "users";
+        return "admin/users";
     }
 
     @GetMapping("/addnewuser")
     public String addNewUser(Model model) {
         model.addAttribute("user", new UserBuilder().createUser());
-        return "addnewuser";
+        return "admin/addnewuser";
     }
 
     @PostMapping("/addnewuser")
     public String addNewUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addnewuser";
+            return "admin/addnewuser";
         }
         userService.saveUser(user);
         return "redirect:/admin/users?success_add=true";
@@ -60,13 +60,13 @@ public class UserController {
     public String editUser(@PathVariable int userId, Model model) {
         User user = userService.findUserById(userId);
         model.addAttribute("user", user);
-        return "edituser";
+        return "admin/edituser";
     }
 
     @PostMapping("/edituser")
     public String editUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "edituser";
+            return "admin/edituser";
         }
         userService.saveUser(user);
         return "redirect:/admin/users?success_update=true";

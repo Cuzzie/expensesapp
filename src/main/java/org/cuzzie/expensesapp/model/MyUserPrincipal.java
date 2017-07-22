@@ -21,7 +21,7 @@ public class MyUserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         if (user.getIsAdmin()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(Constant.SEC_ROLE_PREFIX + Constant.SEC_ADMIN));
         } else {

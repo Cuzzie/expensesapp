@@ -1,5 +1,6 @@
 package org.cuzzie.expensesapp.config;
 
+import org.cuzzie.expensesapp.Constant;
 import org.cuzzie.expensesapp.service.UserService;
 import org.cuzzie.expensesapp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.authorizeRequests()
+                .antMatchers("/admin/**").hasRole(Constant.SEC_ADMIN)
+                .anyRequest().permitAll()
+                .and()
+                .formLogin().permitAll()
+                .and()
+                .logout().permitAll();
     }
 
     @Bean
