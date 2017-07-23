@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette|Roboto|Titillium+Web" />
+</head>
+<body>
+    <div th:replace="fragments/header :: header" />
+
+    <div id="login-body" class="login-body">
+        <h2 th:text="#{login.title}">Login</h2>
+        <h4 th:text="#{login.subtitle}">Enter your credentials</h4>
+        <div class="container">
+            <div th:if="${param.logout}">
+                <p class="logout-text" th:text="#{login.logout}">You have been logged out.</p>
+            </div>
+            <div th:if="${param.error}">
+                <p class="error-text" th:text="#{login.error}">Wrong username of password! Please try again.</p>
+            </div>
+            <form class="form-horizontal" action="/login" th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <div class="col-md-4 control-label">
+                        <label for="username" th:text="#{admin.addnewuser.label.username}">Username</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input name="username" id="username" class="form-control input-lg"
+                               placeholder="Username" required="true" autofocus="true" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label">
+                        <label for="password" th:text="#{admin.addnewuser.label.password}">Password</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="password" name="password" id="password" class="form-control input-lg"
+                               placeholder="Password" required="true" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group row">
+                        <div class="login-buttons">
+                            <button class="btn btn-primary" th:text="#{global.button.submit}">Submit</button>
+                            <button type="reset" class="btn btn-default" th:text="#{global.button.reset}">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

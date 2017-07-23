@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Users</title>
@@ -16,10 +17,10 @@
                 </button>
                 <a class="navbar-brand" href="/" th:href="@{/}">Cuzzie Expenses App</a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div sec:authorize="isAuthenticated()" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="/admin/users" th:href="@{/admin/users}">
+                    <li sec:authorize="hasRole('ADMIN')" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="/admin/users" th:href="@{/admin/users}" th:text="#{menu.header.admin}">
                             Administration
                             <span class="caret"></span>
                         </a>
@@ -31,6 +32,9 @@
                                 <a href="/admin/categories" th:href="@{/admin/categories}" th:text="#{menu.item.admin.categories}">Categories</a>
                             </li>
                         </ul>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout" th:href="@{/logout}" th:text="#{global.link.logout}">Logout</a>
                     </li>
                 </ul>
             </div>

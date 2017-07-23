@@ -13,33 +13,33 @@
     <div id="main-body" class="main-body">
         <h2 th:text="#{overview.title}">OVERVIEW</h2>
         <h4 th:text="#{overview.subtitle}">Transactions of Income and Expenses</h4>
-        <div class="container">
-            <div class="row">
-                <h3 th:text="#{overview.transactions.recent}">Most Recent Transactions</h3>
-                <table class="table table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th th:text="#{overview.table.header.id}">ID</th>
-                            <th th:text="#{overview.table.header.name}">Name</th>
-                            <th th:text="#{overview.table.header.type}">Type</th>
-                            <th th:text="#{overview.table.header.amount}">Amount</th>
-                            <th th:text="#{overview.table.header.date}">Date</th>
-                            <th th:text="#{overview.table.header.description}">Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="transaction : #{recentTransactions}">
-                            <th th:text="${transaction.id}" />
-                            <th th:text="${transaction.category.name}" />
-                            <th th:text="${transaction.category.type}" />
-                            <th th:text="${transaction.amount}" />
-                            <th th:text="${transaction.date}" />
-                            <th th:text="${transaction.description}" />
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <!--<div class="container">-->
+            <!--<div class="row">-->
+                <!--<h3 th:text="#{overview.transactions.recent}">Most Recent Transactions</h3>-->
+                <!--<table class="table table-hover table-bordered">-->
+                    <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th th:text="#{overview.table.header.id}">ID</th>-->
+                            <!--<th th:text="#{overview.table.header.name}">Name</th>-->
+                            <!--<th th:text="#{overview.table.header.type}">Type</th>-->
+                            <!--<th th:text="#{overview.table.header.amount}">Amount</th>-->
+                            <!--<th th:text="#{overview.table.header.date}">Date</th>-->
+                            <!--<th th:text="#{overview.table.header.description}">Description</th>-->
+                        <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                        <!--<tr th:each="transaction : #{recentTransactions}">-->
+                            <!--<th th:text="${transaction.id}" />-->
+                            <!--<th th:text="${transaction.category.name}" />-->
+                            <!--<th th:text="${transaction.category.type}" />-->
+                            <!--<th th:text="${transaction.amount}" />-->
+                            <!--<th th:text="${transaction.date}" />-->
+                            <!--<th th:text="${transaction.description}" />-->
+                        <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 
     <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
