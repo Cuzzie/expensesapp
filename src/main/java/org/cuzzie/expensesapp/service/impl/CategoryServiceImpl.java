@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Cuzzie on 6/18/2017.
  */
-@Service
+@Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
