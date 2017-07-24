@@ -31,6 +31,9 @@ public class Transaction extends BaseModel{
     @Column(name = "description")
     private String description;
 
+    public Transaction() {
+    }
+
     public Transaction(Category category, BigDecimal amount, Date date, String description) {
         this.category = category;
         this.amount = amount;
