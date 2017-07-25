@@ -56,4 +56,9 @@ public class HomeController {
         return "login";
     }
 
+    @GetMapping("/addnewtransaction")
+    public String addNewTransaction() {
+        return "addnewtransaction";
+    }
+
 }

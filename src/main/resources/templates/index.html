@@ -29,13 +29,20 @@
                     <tbody>
                         <tr th:each="transaction, iterStat : ${recentTransactions}">
                             <td th:text="${transaction.category.name}" />
-                            <td th:text="${T(org.cuzzie.expensesapp.Constant.CategoryType).getNameByValue(transaction.category.type)}" />
+                            <td th:text="${T(org.cuzzie.expensesapp.Constant.CategoryType).getDescByValue(transaction.category.type)}" />
                             <td th:text="|$ ${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 2, 'POINT')}|" />
                             <td th:text="${#dates.format(transaction.date, 'dd-MMM-yyyy')}" />
                             <td th:text="${transaction.description}" />
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <a href="/addnewtransaction" th:href="@{/addnewtransaction}"
+                   class="btn btn-primary btn-md"
+                   th:text="#{overview.button.addnewtransaction}">Add new transaction</a>
             </div>
         </div>
         <div class="container">

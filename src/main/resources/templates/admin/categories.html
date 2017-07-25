@@ -47,7 +47,7 @@
                     <tr th:each="category : ${allCategories}">
                         <td th:text="${category.id}">ID</td>
                         <td th:text="${category.name}">name</td>
-                        <td th:text="${T(org.cuzzie.expensesapp.Constant.CategoryType).getNameByValue(category.type)}">type</td>
+                        <td th:text="${T(org.cuzzie.expensesapp.Constant.CategoryType).getDescByValue(category.type)}">type</td>
                         <td>
                             <div class="table-action">
                                 <form action="#" th:action="@{/admin/editcategory/} + ${{category.id}}" method="get">

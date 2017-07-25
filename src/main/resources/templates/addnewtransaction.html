@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette|Roboto|Titillium+Web" />
+</head>
+<body>
+    <div th:replace="fragments/header :: header" />
+
+    <div id="main-body" class="main-body create-transaction">
+        <h2 th:text="#{isAddNewIncome ? addnewincome.title : addnewexpense.title}">Add new transaction</h2>
+        <h4 th:text="#{isAddNewIncome ? addnewincome.subtitle : addnewexpense.subtitle}">Enter new transaction details</h4>
+        <div class="container">
+            <form class="form-horizontal" action="/addnewtransaction" th:action="@{isAddNewIncome ? '/addnewincome' : '/addnewexpense'}" th:object="${transaction}" method="post">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                    <p th:text="#{global.error.enter_mandatory_fields}">Please fill in the mandatory fields!</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="name" th:text="#{addnewtransaction.label.name}">Name</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select id="name" class="form-control" th:field="*{category.name}">
+                            <option value="" th:text="#{global.select.option.name('name')}" />
+                            <option th:each="category : ${allCategories}"
+                                    th:value="${category.name}"
+                                    th:text="${category}" />
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="amount" th:text="#{addnewtransaction.label.amount}">Amount</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input class="form-control" id="amount" placeholder="Amount" th:field="*{amount}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="date" th:text="#{addnewtransaction.label.date}">Date</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="date" class="form-control" id="date" placeholder="Date" th:field="*{date}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 control-label">
+                        <label for="description" th:text="#{addnewtransaction.label.description}">Description</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input class="form-control" id="description" placeholder="Description" th:field="*{description}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-primary" th:text="#{global.button.submit}">Submit</button>
+                        <button type="reset" class="btn btn-default" th:text="#{global.button.reset}">Reset</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

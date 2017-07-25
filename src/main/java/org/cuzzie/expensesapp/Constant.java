@@ -9,22 +9,29 @@ import java.util.Optional;
 public class Constant {
 
     public enum CategoryType {
-        INCOME("I"),
-        EXPENSE("E");
+        INCOME("I", "Income"),
+        EXPENSE("E", "Expenses");
 
         private final String value;
 
-        CategoryType(String value) {
+        private final String description;
+
+        CategoryType(String value, String description) {
             this.value = value;
+            this.description = description;
         }
 
         public String getValue() {
             return value;
         }
 
-        public static String getNameByValue(String value) {
+        public String getDescription() {
+            return description;
+        }
+
+        public static String getDescByValue(String value) {
             Optional<CategoryType> categoryType = Arrays.stream(CategoryType.values()).filter(ct -> value.equals(ct.getValue())).findFirst();
-            return categoryType.map(CategoryType::name).orElse("");
+            return categoryType.map(CategoryType::getDescription).orElse("");
         }
     }
 
