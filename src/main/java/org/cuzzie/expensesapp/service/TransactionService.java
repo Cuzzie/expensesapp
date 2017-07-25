@@ -13,7 +13,9 @@ public interface TransactionService {
 
     Transaction findTransactionById(int transactionId);
 
-    List<Transaction> findTop10Transactions();
+    List<Transaction> findTop10ByOrderByDateDesc();
+
+    List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type);
 
     void saveTransaction(Transaction transaction);
 

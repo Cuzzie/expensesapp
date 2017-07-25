@@ -14,4 +14,6 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
 
     List<Transaction> findTop10ByOrderByDateDesc();
 
+    List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type);
+
 }

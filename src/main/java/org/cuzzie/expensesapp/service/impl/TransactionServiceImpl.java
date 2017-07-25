@@ -28,8 +28,13 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<Transaction> findTop10Transactions() {
+    public List<Transaction> findTop10ByOrderByDateDesc() {
         return transactionRepository.findTop10ByOrderByDateDesc();
+    }
+
+    @Override
+    public List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type) {
+        return transactionRepository.findTop10ByCategoryTypeOrderByDateDesc(type);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.cuzzie.expensesapp.controller;
 
+import org.cuzzie.expensesapp.Constant;
 import org.cuzzie.expensesapp.model.Transaction;
 import org.cuzzie.expensesapp.model.UserBuilder;
 import org.cuzzie.expensesapp.service.TransactionService;
@@ -22,8 +23,20 @@ public class HomeController {
 
     @ModelAttribute("recentTransactions")
     public List<Transaction> recentTransactions() {
-        List<Transaction> recentTransactions = transactionService.findTop10Transactions();
+        List<Transaction> recentTransactions = transactionService.findTop10ByOrderByDateDesc();
         return recentTransactions;
+    }
+
+    @ModelAttribute("recentIncome")
+    public List<Transaction> recentIncome() {
+        List<Transaction> recentIncome = transactionService.findTop10ByCategoryTypeOrderByDateDesc(Constant.CategoryType.INCOME.getValue());
+        return recentIncome;
+    }
+
+    @ModelAttribute("recentExpenses")
+    public List<Transaction> recentExpenses() {
+        List<Transaction> recentExpenses = transactionService.findTop10ByCategoryTypeOrderByDateDesc(Constant.CategoryType.EXPENSE.getValue());
+        return recentExpenses;
     }
 
     @GetMapping("/")

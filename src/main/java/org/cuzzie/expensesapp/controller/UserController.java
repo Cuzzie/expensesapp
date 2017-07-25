@@ -30,6 +30,7 @@ public class UserController {
         List<String> allCountries = Arrays.stream(countryCodes)
                 .map(countryCode -> new Locale("", countryCode))
                 .map(Locale::getDisplayCountry)
+                .sorted()
                 .collect(Collectors.toList());
         return allCountries;
     }
