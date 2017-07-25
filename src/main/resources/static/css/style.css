@@ -113,3 +113,18 @@ h4 {
     color: red;
     text-align: center;
 }
+
+.table thead tr {
+    background-color: steelblue;
+    color: aliceblue;
+}
+
+.income-table thead tr {
+    background-color: seagreen;
+    color: aliceblue;
+}
+
+.expenses-table thead tr {
+    background-color: tomato;
+    color: aliceblue;
+}

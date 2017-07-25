@@ -16,10 +16,9 @@
         <div class="container">
             <div class="row">
                 <h3 th:text="#{overview.transactions.recent}">Most Recent Transactions</h3>
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered transactions-table">
                     <thead>
                         <tr>
-                            <th th:text="#{overview.table.header.id}">ID</th>
                             <th th:text="#{overview.table.header.name}">Name</th>
                             <th th:text="#{overview.table.header.type}">Type</th>
                             <th th:text="#{overview.table.header.amount}">Amount</th>
@@ -29,10 +28,9 @@
                     </thead>
                     <tbody>
                         <tr th:each="transaction, iterStat : ${recentTransactions}">
-                            <td th:text="${iterStat.count}" />
                             <td th:text="${transaction.category.name}" />
                             <td th:text="${T(org.cuzzie.expensesapp.Constant.CategoryType).getNameByValue(transaction.category.type)}" />
-                            <td th:text="${transaction.amount}" />
+                            <td th:text="|$ ${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 2, 'POINT')}|" />
                             <td th:text="${#dates.format(transaction.date, 'dd-MMM-yyyy')}" />
                             <td th:text="${transaction.description}" />
                         </tr>
@@ -43,10 +41,9 @@
         <div class="container">
             <div class="row">
                 <h3 th:text="#{overview.transactions.recent.income}">Most Recent Income Transactions</h3>
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered income-table">
                     <thead>
                         <tr>
-                            <th th:text="#{overview.table.header.id}">ID</th>
                             <th th:text="#{overview.table.header.name}">Name</th>
                             <th th:text="#{overview.table.header.amount}">Amount</th>
                             <th th:text="#{overview.table.header.date}">Date</th>
@@ -55,9 +52,8 @@
                     </thead>
                     <tbody>
                         <tr th:each="transaction, iterStat : ${recentIncome}">
-                            <td th:text="${iterStat.count}" />
                             <td th:text="${transaction.category.name}" />
-                            <td th:text="${transaction.amount}" />
+                            <td th:text="|$ ${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 2, 'POINT')}|" />
                             <td th:text="${#dates.format(transaction.date, 'dd-MMM-yyyy')}" />
                             <td th:text="${transaction.description}" />
                         </tr>
@@ -68,10 +64,9 @@
         <div class="container">
             <div class="row">
                 <h3 th:text="#{overview.transactions.recent.expenses}">Most Recent Expenses Transactions</h3>
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered expenses-table">
                     <thead>
                         <tr>
-                            <th th:text="#{overview.table.header.id}">ID</th>
                             <th th:text="#{overview.table.header.name}">Name</th>
                             <th th:text="#{overview.table.header.amount}">Amount</th>
                             <th th:text="#{overview.table.header.date}">Date</th>
@@ -80,9 +75,8 @@
                     </thead>
                     <tbody>
                         <tr th:each="transaction, iterStat : ${recentExpenses}">
-                            <td th:text="${iterStat.count}" />
                             <td th:text="${transaction.category.name}" />
-                            <td th:text="${transaction.amount}" />
+                            <td th:text="|$ ${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 2, 'POINT')}|" />
                             <td th:text="${#dates.format(transaction.date, 'dd-MMM-yyyy')}" />
                             <td th:text="${transaction.description}" />
                         </tr>
