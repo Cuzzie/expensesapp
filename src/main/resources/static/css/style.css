@@ -128,3 +128,29 @@ h4 {
     background-color: tomato;
     color: aliceblue;
 }
+
+.index h4 {
+    padding-bottom: 20px;
+}
+
+.index .transactions-button {
+    text-align: center;
+}
+
+.index .income-expense-table {
+    border-spacing: 20px;
+    background-color: #f5f5f5;
+    width: 100%;
+}
+
+.index .income-expense-cell {
+    width: 50%;
+}
+
+.index .income-expense-cell div {
+    min-height: 200px;
+    min-width: 300px;
+    margin: 20px;
+    background-color: #fff;
+    border: 1px solid #dcdce2;
+}

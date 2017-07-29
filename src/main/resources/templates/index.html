@@ -10,9 +10,37 @@
 <body>
     <div th:replace="fragments/header :: header" />
 
-    <div id="main-body" class="main-body">
+    <div id="main-body" class="main-body index">
         <h2 th:text="#{overview.title}">OVERVIEW</h2>
         <h4 th:text="#{overview.subtitle}">Transactions of Income and Expenses</h4>
+        <div class="container">
+            <div class="row transactions-button">
+                <a href="/addnewincome" th:href="@{/addnewincome}"
+                   class="btn btn-primary btn-md"
+                   th:text="#{overview.button.addnewincome}">Add new income</a>
+                <a href="/addnewexpense" th:href="@{/addnewexpense}"
+                   class="btn btn-primary btn-md"
+                   th:text="#{overview.button.addnewexpense}">Add new expense</a>
+            </div>
+        </div>
+        <!--<div class="container">-->
+            <!--<div class="row">-->
+                <!--<table class="income-expense-table">-->
+                    <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td class="income-expense-cell">-->
+                                <!--<div>-->
+                                <!--</div>-->
+                            <!--</td>-->
+                            <!--<td class="income-expense-cell">-->
+                                <!--<div>-->
+                                <!--</div>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="container">
             <div class="row">
                 <h3 th:text="#{overview.transactions.recent}">Most Recent Transactions</h3>
@@ -36,13 +64,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <a href="/addnewtransaction" th:href="@{/addnewtransaction}"
-                   class="btn btn-primary btn-md"
-                   th:text="#{overview.button.addnewtransaction}">Add new transaction</a>
             </div>
         </div>
         <div class="container">

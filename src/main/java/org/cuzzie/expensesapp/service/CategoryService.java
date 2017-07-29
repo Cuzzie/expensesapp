@@ -11,6 +11,10 @@ public interface CategoryService {
 
     List<Category> findAllCategories();
 
+    List<Category> findAllIncomeCategories();
+
+    List<Category> findAllExpenseCategories();
+
     Category findCategoryById(int categoryId);
 
     void saveCategory(Category category);

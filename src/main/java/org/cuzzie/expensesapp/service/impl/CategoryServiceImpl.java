@@ -1,5 +1,6 @@
 package org.cuzzie.expensesapp.service.impl;
 
+import org.cuzzie.expensesapp.Constant;
 import org.cuzzie.expensesapp.model.Category;
 import org.cuzzie.expensesapp.repository.CategoryRepository;
 import org.cuzzie.expensesapp.service.CategoryService;
@@ -20,6 +21,16 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> findAllCategories() {
         return (List<Category>) categoryRepository.findAll();
+    }
+
+    @Override
+    public List<Category> findAllIncomeCategories() {
+        return categoryRepository.findByType(Constant.CategoryType.INCOME.getValue());
+    }
+
+    @Override
+    public List<Category> findAllExpenseCategories() {
+        return categoryRepository.findByType(Constant.CategoryType.EXPENSE.getValue());
     }
 
     @Override

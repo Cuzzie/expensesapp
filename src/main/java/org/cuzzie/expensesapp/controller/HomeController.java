@@ -2,14 +2,18 @@ package org.cuzzie.expensesapp.controller;
 
 import org.cuzzie.expensesapp.Constant;
 import org.cuzzie.expensesapp.model.Transaction;
+import org.cuzzie.expensesapp.model.TransactionBuilder;
 import org.cuzzie.expensesapp.model.UserBuilder;
 import org.cuzzie.expensesapp.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -56,8 +60,26 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/addnewtransaction")
-    public String addNewTransaction() {
+    @GetMapping("/addnewincome")
+    public String addNewIncome(Model model) {
+        model.addAttribute("isAddNewIncome", true);
+        model.addAttribute("transaction", new TransactionBuilder().createTransaction());
+        return "addnewtransaction";
+    }
+
+    @PostMapping("/addnewincome")
+    public String addNewIncome(@Valid @ModelAttribute("transaction") Transaction transaction, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "addnewtransaction";
+        }
+        transactionService.saveTransaction(transaction);
+        return "redirect:/addnewincome?success_add=true";
+    }
+
+    @GetMapping("/addnewexpense")
+    public String addNewExpense(Model model) {
+        model.addAttribute("isAddNewIncome", false);
+        model.addAttribute("transaction", new TransactionBuilder().createTransaction());
         return "addnewtransaction";
     }
 

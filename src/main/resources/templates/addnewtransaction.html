@@ -23,11 +23,11 @@
                         <label for="name" th:text="#{addnewtransaction.label.name}">Name</label>
                     </div>
                     <div class="col-md-10">
-                        <select id="name" class="form-control" th:field="*{category.name}">
+                        <select id="name" class="form-control" th:field="*{category}">
                             <option value="" th:text="#{global.select.option.name('name')}" />
-                            <option th:each="category : ${allCategories}"
-                                    th:value="${category.name}"
-                                    th:text="${category}" />
+                            <option th:each="incomeCategory : ${allIncomeCategories}"
+                                    th:value="${incomeCategory.id}"
+                                    th:text="${incomeCategory.name}" />
                         </select>
                     </div>
                 </div>
@@ -57,11 +57,10 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-primary" th:text="#{global.button.submit}">Submit</button>
+                        <button class="btn btn-primary" th:text="#{global.button.submit}">Submit</button>
                         <button type="reset" class="btn btn-default" th:text="#{global.button.reset}">Reset</button>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>

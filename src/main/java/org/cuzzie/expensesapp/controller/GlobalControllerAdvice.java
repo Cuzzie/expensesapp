@@ -20,4 +20,16 @@ public class GlobalControllerAdvice {
         return allCategories;
     }
 
+    @ModelAttribute("allIncomeCategories")
+    public List<Category> allIncomeCategories() {
+        List<Category> allIncomeCategories = categoryService.findAllIncomeCategories();
+        return allIncomeCategories;
+    }
+
+    @ModelAttribute("allExpenseCategories")
+    public List<Category> allExpenseCategories() {
+        List<Category> allExpenseCategories = categoryService.findAllExpenseCategories();
+        return allExpenseCategories;
+    }
+
 }
