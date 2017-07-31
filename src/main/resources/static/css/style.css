@@ -125,7 +125,7 @@ h4 {
 }
 
 .expenses-table thead tr {
-    background-color: tomato;
+    background-color: crimson;
     color: aliceblue;
 }
 
@@ -153,4 +153,14 @@ h4 {
     margin: 20px;
     background-color: #fff;
     border: 1px solid #dcdce2;
+}
+
+.index .transactions-button .income-button {
+    background-color: seagreen;
+    color: aliceblue;
+}
+
+.index .transactions-button .expense-button {
+    background-color: crimson;
+    color: aliceblue;
 }

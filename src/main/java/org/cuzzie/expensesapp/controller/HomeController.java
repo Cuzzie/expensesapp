@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Cuzzie on 6/16/2017.
@@ -73,7 +74,7 @@ public class HomeController {
             return "addnewtransaction";
         }
         transactionService.saveTransaction(transaction);
-        return "redirect:/addnewincome?success_add=true";
+        return "redirect:/?success_add=true";
     }
 
     @GetMapping("/addnewexpense")
@@ -81,6 +82,15 @@ public class HomeController {
         model.addAttribute("isAddNewIncome", false);
         model.addAttribute("transaction", new TransactionBuilder().createTransaction());
         return "addnewtransaction";
+    }
+
+    @PostMapping("/addnewexpense")
+    public String addNewExpense(@Valid @ModelAttribute("transaction") Transaction transaction, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "addnewtransaction";
+        }
+        transactionService.saveTransaction(transaction);
+        return "redirect:/?success_add=true";
     }
 
 }

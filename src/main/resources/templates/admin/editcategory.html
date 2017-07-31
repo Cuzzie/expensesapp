@@ -43,7 +43,7 @@
                             <option value="" th:text="#{global.select.option.name('type')}" />
                             <option th:each="type : ${T(org.cuzzie.expensesapp.Constant.CategoryType).values()}"
                                     th:value="${type.value}"
-                                    th:text="${type}" />
+                                    th:text="${type.description}" />
                         </select>
                     </div>
                 </div>

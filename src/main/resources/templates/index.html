@@ -16,31 +16,17 @@
         <div class="container">
             <div class="row transactions-button">
                 <a href="/addnewincome" th:href="@{/addnewincome}"
-                   class="btn btn-primary btn-md"
+                   class="btn btn-primary btn-md income-button"
                    th:text="#{overview.button.addnewincome}">Add new income</a>
                 <a href="/addnewexpense" th:href="@{/addnewexpense}"
-                   class="btn btn-primary btn-md"
+                   class="btn btn-primary btn-md expense-button"
                    th:text="#{overview.button.addnewexpense}">Add new expense</a>
             </div>
         </div>
-        <!--<div class="container">-->
-            <!--<div class="row">-->
-                <!--<table class="income-expense-table">-->
-                    <!--<tbody>-->
-                        <!--<tr>-->
-                            <!--<td class="income-expense-cell">-->
-                                <!--<div>-->
-                                <!--</div>-->
-                            <!--</td>-->
-                            <!--<td class="income-expense-cell">-->
-                                <!--<div>-->
-                                <!--</div>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="alert alert-success" th:if="${(param.success_add != null) and (param.success_add[0] == 'true')}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p th:text="#{global.success.record_added}">Record added successfully!</p>
+        </div>
         <div class="container">
             <div class="row">
                 <h3 th:text="#{overview.transactions.recent}">Most Recent Transactions</h3>

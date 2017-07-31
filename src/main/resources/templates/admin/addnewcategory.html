@@ -35,13 +35,13 @@
                             <option value="" th:text="#{global.select.option.name('type')}" />
                             <option th:each="type : ${T(org.cuzzie.expensesapp.Constant.CategoryType).values()}"
                                     th:value="${type.value}"
-                                    th:text="${type}" />
+                                    th:text="${type.description}" />
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-primary" th:text="#{global.button.submit}">Submit</button>
+                        <button class="btn btn-primary" th:text="#{global.button.submit}">Submit</button>
                         <button type="reset" class="btn btn-default" th:text="#{global.button.reset}">Reset</button>
                     </div>
                 </div>

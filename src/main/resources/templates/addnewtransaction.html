@@ -11,23 +11,23 @@
     <div th:replace="fragments/header :: header" />
 
     <div id="main-body" class="main-body create-transaction">
-        <h2 th:text="#{isAddNewIncome ? addnewincome.title : addnewexpense.title}">Add new transaction</h2>
-        <h4 th:text="#{isAddNewIncome ? addnewincome.subtitle : addnewexpense.subtitle}">Enter new transaction details</h4>
+        <h2 th:text="${isAddNewIncome} ? #{addnewincome.title} : #{addnewexpense.title}">Add new transaction</h2>
+        <h4 th:text="${isAddNewIncome} ? #{addnewincome.subtitle} : #{addnewexpense.subtitle}">Enter new transaction details</h4>
         <div class="container">
-            <form class="form-horizontal" action="/addnewtransaction" th:action="@{isAddNewIncome ? '/addnewincome' : '/addnewexpense'}" th:object="${transaction}" method="post">
+            <form class="form-horizontal" action="/addnewtransaction" th:action="${isAddNewIncome} ? @{/addnewincome} : @{/addnewexpense}" th:object="${transaction}" method="post">
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                     <p th:text="#{global.error.enter_mandatory_fields}">Please fill in the mandatory fields!</p>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-2 control-label">
-                        <label for="name" th:text="#{addnewtransaction.label.name}">Name</label>
+                        <label for="name" th:text="#{addnewtransaction.label.category}">Category</label>
                     </div>
                     <div class="col-md-10">
                         <select id="name" class="form-control" th:field="*{category}">
                             <option value="" th:text="#{global.select.option.name('name')}" />
-                            <option th:each="incomeCategory : ${allIncomeCategories}"
-                                    th:value="${incomeCategory.id}"
-                                    th:text="${incomeCategory.name}" />
+                            <option th:each="category : ${isAddNewIncome ? allIncomeCategories : allExpenseCategories}"
+                                    th:value="${category.id}"
+                                    th:text="${category.name}" />
                         </select>
                     </div>
                 </div>
