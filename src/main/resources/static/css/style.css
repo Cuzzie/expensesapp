@@ -154,13 +154,3 @@ h4 {
     background-color: #fff;
     border: 1px solid #dcdce2;
 }
-
-.index .transactions-button .income-button {
-    background-color: seagreen;
-    color: aliceblue;
-}
-
-.index .transactions-button .expense-button {
-    background-color: crimson;
-    color: aliceblue;
-}
