@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -91,6 +92,14 @@ public class HomeController {
         }
         transactionService.saveTransaction(transaction);
         return "redirect:/?success_add=true";
+    }
+
+    @GetMapping("/filtermonth/{month}")
+    public String filterMonth(Model model, @PathVariable String month) {
+        if (!StringUtils.isEmpty(month)) {
+            model.addAttribute("blabla", month);
+        }
+        return "fragments/overviewbody :: overviewList";
     }
 
 }
