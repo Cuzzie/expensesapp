@@ -40,10 +40,15 @@
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script language="JavaScript" type="text/javascript">
+        $(function() {
+            $("#overview-filter").val(new Date().toISOString().substr(0, 7));
+            onSelectMonth();
+        });
+
         function onSelectMonth() {
-            var url="/filtermonth";
+            var url="/filtermonth/";
             if ($("#overview-filter").val() != "") {
-                url += "/" + $("#overview-filter").val();
+                url += $("#overview-filter").val();
             }
             $("#overview-block").load(url);
         }

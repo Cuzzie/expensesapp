@@ -2,6 +2,7 @@ package org.cuzzie.expensesapp.service;
 
 import org.cuzzie.expensesapp.model.Transaction;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +17,8 @@ public interface TransactionService {
     List<Transaction> findTop10ByOrderByDateDesc();
 
     List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type);
+
+    List<Transaction> findByDateBetweenOrderByDateDesc(Date startDate, Date endDate);
 
     void saveTransaction(Transaction transaction);
 

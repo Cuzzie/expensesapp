@@ -6,6 +6,7 @@ import org.cuzzie.expensesapp.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +36,11 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type) {
         return transactionRepository.findTop10ByCategoryTypeOrderByDateDesc(type);
+    }
+
+    @Override
+    public List<Transaction> findByDateBetweenOrderByDateDesc(Date startDate, Date endDate) {
+        return transactionRepository.findByDateBetweenOrderByDateDesc(startDate, endDate);
     }
 
     @Override

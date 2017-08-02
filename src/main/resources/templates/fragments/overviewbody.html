@@ -68,7 +68,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="transaction, iterStat : ${recentTransactions}">
+                    <tr th:each="transaction, iterStat : ${allTransactions}">
                         <td th:text="${transaction.category.name}" />
                         <td th:text="${T(org.cuzzie.expensesapp.Constant.CategoryType).getDescByValue(transaction.category.type)}" />
                         <td th:text="${#dates.format(transaction.date, 'dd-MMM-yyyy')}" />
