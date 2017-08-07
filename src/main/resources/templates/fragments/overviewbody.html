@@ -7,7 +7,6 @@
 </head>
 <body>
     <div th:fragment="overviewList" id="overview-block">
-        <h2 th:text="${blabla}"></h2>
         <div class="container">
             <div class="row">
                 <div class="col-md-6" >
@@ -22,7 +21,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="transaction, iterStat : ${recentIncome}">
+                        <tr th:each="transaction, iterStat : ${filteredIncome}">
                             <td th:text="${transaction.category.name}" />
                             <td th:text="${#dates.format(transaction.date, 'dd-MMM-yyyy')}" />
                             <td th:text="${transaction.description}" />
@@ -43,7 +42,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="transaction, iterStat : ${recentExpenses}">
+                        <tr th:each="transaction, iterStat : ${filteredExpenses}">
                             <td th:text="${transaction.category.name}" />
                             <td th:text="${#dates.format(transaction.date, 'dd-MMM-yyyy')}" />
                             <td th:text="${transaction.description}" />
@@ -68,7 +67,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="transaction, iterStat : ${allTransactions}">
+                    <tr th:each="transaction, iterStat : ${filteredTransactions}">
                         <td th:text="${transaction.category.name}" />
                         <td th:text="${T(org.cuzzie.expensesapp.Constant.CategoryType).getDescByValue(transaction.category.type)}" />
                         <td th:text="${#dates.format(transaction.date, 'dd-MMM-yyyy')}" />

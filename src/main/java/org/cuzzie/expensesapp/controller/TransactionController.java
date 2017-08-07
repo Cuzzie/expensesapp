@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class TransactionController {
@@ -78,26 +79,34 @@ public class TransactionController {
 
     @GetMapping("/filtermonth/{filterdate}")
     public String filterMonth(Model model, @PathVariable("filterdate") String filterDateStr) {
-        filterTransactionsByDate(model, filterDateStr);
+        List<Transaction> filteredTransactions = null;
+        try {
+            filteredTransactions = filterTransactionsByDate(model, filterDateStr);
+            model.addAttribute("filteredTransactions", filteredTransactions);
+            List<Transaction> filteredIncome = filteredTransactions.stream()
+                    .filter(tx -> Constant.CategoryType.INCOME.getValue().equals(tx.getCategory().getType()))
+                    .collect(Collectors.toList());
+            model.addAttribute("filteredIncome", filteredIncome);
+            List<Transaction> filteredExpenses = filteredTransactions.stream()
+                    .filter(tx -> Constant.CategoryType.EXPENSE.getValue().equals(tx.getCategory().getType()))
+                    .collect(Collectors.toList());
+            model.addAttribute("filteredExpenses", filteredExpenses);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return "fragments/overviewbody :: overviewList";
     }
 
-    private void filterTransactionsByDate(Model model, String filterDateStr) {
-        try {
-            Date filterStartDate, filterEndDate;
-            if (!StringUtils.isEmpty(filterDateStr)) {
-                filterStartDate = AppUtil.getStartOfMonth(filterDateStr);
-                filterEndDate = AppUtil.getEndOfMonth(filterDateStr);
-            } else {
-                filterStartDate = AppUtil.getCurrentStartOfMonth();
-                filterEndDate = AppUtil.getCurrentEndOfMonth();
-            }
-            List<Transaction> filteredTransactions = transactionService.findByDateBetweenOrderByDateDesc(filterStartDate, filterEndDate);
-            model.addAttribute("allTransactions", filteredTransactions);
+    private List<Transaction> filterTransactionsByDate(Model model, String filterDateStr) throws ParseException {
+        Date filterStartDate, filterEndDate;
+        if (!StringUtils.isEmpty(filterDateStr)) {
+            filterStartDate = AppUtil.getStartOfMonth(filterDateStr);
+            filterEndDate = AppUtil.getEndOfMonth(filterDateStr);
+        } else {
+            filterStartDate = AppUtil.getCurrentStartOfMonth();
+            filterEndDate = AppUtil.getCurrentEndOfMonth();
         }
-        catch (ParseException e){
-            e.printStackTrace();
-        }
+        return transactionService.findByDateBetweenOrderByDateDesc(filterStartDate, filterEndDate);
     }
 
 }

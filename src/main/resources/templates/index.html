@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette|Roboto|Titillium+Web" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
 </head>
 <body>
     <div th:replace="fragments/header :: header" />
@@ -14,9 +19,11 @@
         <h2 th:text="#{overview.title}">OVERVIEW</h2>
         <h4 th:text="#{overview.subtitle}">Transactions of Income and Expenses</h4>
         <div class="container">
-            <div class="row overview-filter">
-                <label for="overview-filter" th:text="#{overview.month.filter}" />
-                <input id="overview-filter" type="month" onchange="onSelectMonth()"/>
+            <div class="bootstrap-iso">
+                <div class="row overview-filter">
+                    <label for="overview-filter" th:text="#{overview.month.filter}" />
+                    <input id="overview-filter" type="month" placeholder="YYYY-MM" onchange="onSelectMonth()"/>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -38,9 +45,20 @@
 
     <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 
     <script language="JavaScript" type="text/javascript">
         $(function() {
+            var date_input=$('#overview-filter'); //our date input has the name "date"
+            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+            date_input.datepicker({
+                format: 'yyyy-mm',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            })
+
             $("#overview-filter").val(new Date().toISOString().substr(0, 7));
             onSelectMonth();
         });

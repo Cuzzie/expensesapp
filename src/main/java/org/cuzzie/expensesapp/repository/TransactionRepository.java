@@ -1,9 +1,11 @@
 package org.cuzzie.expensesapp.repository;
 
 import org.cuzzie.expensesapp.model.Transaction;
+import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,6 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
 
     List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type);
 
-    List<Transaction> findByDateBetweenOrderByDateDesc(Date startDate, Date endDate);
+    List<Transaction> findByDateBetweenOrderByDateDesc(@Temporal(TemporalType.DATE) Date startDate, @Temporal(TemporalType.DATE) Date endDate);
 
 }
