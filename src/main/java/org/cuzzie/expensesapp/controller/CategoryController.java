@@ -3,6 +3,9 @@ package org.cuzzie.expensesapp.controller;
 import org.cuzzie.expensesapp.model.Category;
 import org.cuzzie.expensesapp.model.CategoryBuilder;
 import org.cuzzie.expensesapp.service.CategoryService;
+import org.cuzzie.expensesapp.util.AppUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class CategoryController {
+
+    private final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
     private CategoryService categoryService;
@@ -38,6 +43,7 @@ public class CategoryController {
     @PostMapping("/addnewcategory")
     public String addNewCategory(@Valid @ModelAttribute("category") Category category, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            logger.error(AppUtil.compileError(bindingResult));
             return "admin/addnewcategory";
         }
         categoryService.saveCategory(category);
@@ -54,6 +60,7 @@ public class CategoryController {
     @PostMapping("/editcategory")
     public String editCategory(@Valid @ModelAttribute("category") Category category, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            logger.error(AppUtil.compileError(bindingResult));
             return "admin/editcategory";
         }
         categoryService.saveCategory(category);

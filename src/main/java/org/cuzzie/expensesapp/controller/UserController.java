@@ -3,6 +3,9 @@ package org.cuzzie.expensesapp.controller;
 import org.cuzzie.expensesapp.model.User;
 import org.cuzzie.expensesapp.model.UserBuilder;
 import org.cuzzie.expensesapp.service.UserService;
+import org.cuzzie.expensesapp.util.AppUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,8 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/admin")
 public class UserController {
+
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -51,6 +56,7 @@ public class UserController {
     @PostMapping("/addnewuser")
     public String addNewUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            logger.error(AppUtil.compileError(bindingResult));
             return "addnewuser";
         }
         userService.saveUser(user);
@@ -67,6 +73,7 @@ public class UserController {
     @PostMapping("/edituser")
     public String editUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            logger.error(AppUtil.compileError(bindingResult));
             return "admin/edituser";
         }
         userService.saveUser(user);

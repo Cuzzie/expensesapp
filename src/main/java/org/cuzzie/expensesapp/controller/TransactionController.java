@@ -5,6 +5,8 @@ import org.cuzzie.expensesapp.model.Transaction;
 import org.cuzzie.expensesapp.model.TransactionBuilder;
 import org.cuzzie.expensesapp.service.TransactionService;
 import org.cuzzie.expensesapp.util.AppUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,26 +26,10 @@ import java.util.stream.Collectors;
 @Controller
 public class TransactionController {
 
+    private final Logger logger = LoggerFactory.getLogger(TransactionController.class);
+
     @Autowired
     private TransactionService transactionService;
-
-    @ModelAttribute("recentTransactions")
-    public List<Transaction> recentTransactions() {
-        List<Transaction> recentTransactions = transactionService.findTop10ByOrderByDateDesc();
-        return recentTransactions;
-    }
-
-    @ModelAttribute("recentIncome")
-    public List<Transaction> recentIncome() {
-        List<Transaction> recentIncome = transactionService.findTop10ByCategoryTypeOrderByDateDesc(Constant.CategoryType.INCOME.getValue());
-        return recentIncome;
-    }
-
-    @ModelAttribute("recentExpenses")
-    public List<Transaction> recentExpenses() {
-        List<Transaction> recentExpenses = transactionService.findTop10ByCategoryTypeOrderByDateDesc(Constant.CategoryType.EXPENSE.getValue());
-        return recentExpenses;
-    }
 
     @GetMapping("/addnewincome")
     public String addNewIncome(Model model) {
@@ -55,6 +41,7 @@ public class TransactionController {
     @PostMapping("/addnewincome")
     public String addNewIncome(@Valid @ModelAttribute("transaction") Transaction transaction, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            logger.error(AppUtil.compileError(bindingResult));
             return "addnewtransaction";
         }
         transactionService.saveTransaction(transaction);
@@ -71,6 +58,7 @@ public class TransactionController {
     @PostMapping("/addnewexpense")
     public String addNewExpense(@Valid @ModelAttribute("transaction") Transaction transaction, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            logger.error(AppUtil.compileError(bindingResult));
             return "addnewtransaction";
         }
         transactionService.saveTransaction(transaction);
@@ -79,9 +67,8 @@ public class TransactionController {
 
     @GetMapping("/filtermonth/{filterdate}")
     public String filterMonth(Model model, @PathVariable("filterdate") String filterDateStr) {
-        List<Transaction> filteredTransactions = null;
         try {
-            filteredTransactions = filterTransactionsByDate(model, filterDateStr);
+            List<Transaction> filteredTransactions = filterTransactionsByDate(model, filterDateStr);
             model.addAttribute("filteredTransactions", filteredTransactions);
             List<Transaction> filteredIncome = filteredTransactions.stream()
                     .filter(tx -> Constant.CategoryType.INCOME.getValue().equals(tx.getCategory().getType()))
@@ -92,7 +79,7 @@ public class TransactionController {
                     .collect(Collectors.toList());
             model.addAttribute("filteredExpenses", filteredExpenses);
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return "fragments/overviewbody :: overviewList";
     }

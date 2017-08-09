@@ -1,13 +1,19 @@
 package org.cuzzie.expensesapp.util;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AppUtil {
 
-    public static Date getDate(String dateStr) throws ParseException{
+    public static Date getDate(String dateStr) throws ParseException {
         return getDate(dateStr, "yyyy-MM-dd");
     }
 
@@ -58,6 +64,14 @@ public class AppUtil {
         cal.set(Calendar.DAY_OF_MONTH, 1);
         cal.add(Calendar.DATE, -1);
         return cal.getTime();
+    }
+
+    public static String compileError(BindingResult bindingResult) {
+        return Optional.ofNullable(bindingResult.getAllErrors())
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(ObjectError::getCode)
+                .collect(Collectors.joining(", "));
     }
 
 }
