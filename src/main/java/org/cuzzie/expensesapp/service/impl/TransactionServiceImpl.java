@@ -39,8 +39,8 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<Transaction> findByDateBetweenOrderByDateDesc(Date startDate, Date endDate) {
-        return transactionRepository.findByDateBetweenOrderByDateDesc(startDate, endDate);
+    public List<Transaction> findByUserIdAndDateBetweenOrderByDateDesc(int userId, Date startDate, Date endDate) {
+        return transactionRepository.findByUserIdAndDateBetweenOrderByDateDesc(userId, startDate, endDate);
     }
 
     @Override

@@ -20,7 +20,7 @@ public interface TransactionService {
 
     List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type);
 
-    List<Transaction> findByDateBetweenOrderByDateDesc(Date startDate, Date endDate);
+    List<Transaction> findByUserIdAndDateBetweenOrderByDateDesc(int userId, Date startDate, Date endDate);
 
     void saveTransaction(Transaction transaction);
 

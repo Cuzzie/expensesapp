@@ -19,6 +19,6 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
 
     List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type);
 
-    List<Transaction> findByDateBetweenOrderByDateDesc(@Temporal(TemporalType.DATE) Date startDate, @Temporal(TemporalType.DATE) Date endDate);
+    List<Transaction> findByUserIdAndDateBetweenOrderByDateDesc(int userId, @Temporal(TemporalType.DATE) Date startDate, @Temporal(TemporalType.DATE) Date endDate);
 
 }

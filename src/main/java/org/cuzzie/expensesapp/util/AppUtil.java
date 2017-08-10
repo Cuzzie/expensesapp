@@ -1,8 +1,14 @@
 package org.cuzzie.expensesapp.util;
 
+import org.cuzzie.expensesapp.model.MyUserPrincipal;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -72,6 +78,18 @@ public class AppUtil {
                 .stream()
                 .map(ObjectError::getCode)
                 .collect(Collectors.joining(", "));
+    }
+
+    public static int getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            // Only proceed if user is logged in
+            if (!(authentication instanceof AnonymousAuthenticationToken)) {
+                MyUserPrincipal userDetails = (MyUserPrincipal) authentication.getPrincipal();
+                return userDetails.getUser().getId();
+            }
+        }
+        return -1;
     }
 
 }

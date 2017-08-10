@@ -1,6 +1,7 @@
 package org.cuzzie.expensesapp.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class UserBuilder {
     private int id;
@@ -12,6 +13,7 @@ public class UserBuilder {
     private String country;
     private Date dob;
     private Boolean isAdmin;
+    private List<Transaction> transactions;
 
     public UserBuilder setId(int id) {
         this.id = id;
@@ -58,7 +60,12 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+        return this;
+    }
+
     public User createUser() {
-        return new User(id, username, password, firstName, lastName, address, country, dob, isAdmin);
+        return new User(id, username, password, firstName, lastName, address, country, dob, isAdmin, transactions);
     }
 }

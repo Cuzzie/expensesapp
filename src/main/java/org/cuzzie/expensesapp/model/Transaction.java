@@ -31,6 +31,10 @@ public class Transaction extends BaseModel{
     @Column(name = "description")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private User user;
+
     public Transaction() {
     }
 
@@ -71,5 +75,13 @@ public class Transaction extends BaseModel{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

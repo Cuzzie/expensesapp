@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Cuzzie on 6/15/2017.
@@ -50,10 +51,13 @@ public class User extends BaseModel{
     @Basic(optional = false)
     private Boolean isAdmin;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Transaction> transactions;
+
     public User() {
     }
 
-    public User(int id, String username, String password, String firstName, String lastName, String address, String country, Date dob, Boolean isAdmin) {
+    public User(int id, String username, String password, String firstName, String lastName, String address, String country, Date dob, Boolean isAdmin, List<Transaction> transactions) {
         super(id);
         this.username = username;
         this.password = password;
@@ -63,6 +67,7 @@ public class User extends BaseModel{
         this.country = country;
         this.dob = dob;
         this.isAdmin = isAdmin;
+        this.transactions = transactions;
     }
 
     public String getUsername() {
@@ -127,5 +132,13 @@ public class User extends BaseModel{
 
     public void setIsAdmin(Boolean admin) {
         isAdmin = admin;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }

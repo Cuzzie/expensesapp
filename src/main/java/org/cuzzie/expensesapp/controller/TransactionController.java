@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.util.StringUtils;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -93,7 +94,7 @@ public class TransactionController {
             filterStartDate = AppUtil.getCurrentStartOfMonth();
             filterEndDate = AppUtil.getCurrentEndOfMonth();
         }
-        return transactionService.findByDateBetweenOrderByDateDesc(filterStartDate, filterEndDate);
+        return transactionService.findByUserIdAndDateBetweenOrderByDateDesc(AppUtil.getCurrentUserId(), filterStartDate, filterEndDate);
     }
 
 }
