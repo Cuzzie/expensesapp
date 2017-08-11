@@ -4,6 +4,7 @@ import org.cuzzie.expensesapp.model.Transaction;
 import org.springframework.data.jpa.repository.Temporal;
 
 import javax.persistence.TemporalType;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -16,11 +17,13 @@ public interface TransactionService {
 
     Transaction findTransactionById(int transactionId);
 
-    List<Transaction> findTop10ByOrderByDateDesc();
-
-    List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type);
-
     List<Transaction> findByUserIdAndDateBetweenOrderByDateDesc(int userId, Date startDate, Date endDate);
+
+    List<Transaction> filterTransactionsByMonth(String filterDateStr) throws ParseException;
+
+    List<Transaction> filterIncomeByMonth(String filterDateStr) throws ParseException;
+
+    List<Transaction> filterExpensesByMonth(String filterDateStr) throws ParseException;
 
     void saveTransaction(Transaction transaction);
 

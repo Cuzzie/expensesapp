@@ -15,10 +15,6 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends CrudRepository<Transaction, Integer> {
 
-    List<Transaction> findTop10ByOrderByDateDesc();
-
-    List<Transaction> findTop10ByCategoryTypeOrderByDateDesc(String type);
-
     List<Transaction> findByUserIdAndDateBetweenOrderByDateDesc(int userId, @Temporal(TemporalType.DATE) Date startDate, @Temporal(TemporalType.DATE) Date endDate);
 
 }

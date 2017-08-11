@@ -69,32 +69,16 @@ public class TransactionController {
     @GetMapping("/filtermonth/{filterdate}")
     public String filterMonth(Model model, @PathVariable("filterdate") String filterDateStr) {
         try {
-            List<Transaction> filteredTransactions = filterTransactionsByDate(model, filterDateStr);
+            List<Transaction> filteredTransactions = transactionService.filterTransactionsByMonth(filterDateStr);
             model.addAttribute("filteredTransactions", filteredTransactions);
-            List<Transaction> filteredIncome = filteredTransactions.stream()
-                    .filter(tx -> Constant.CategoryType.INCOME.getValue().equals(tx.getCategory().getType()))
-                    .collect(Collectors.toList());
+            List<Transaction> filteredIncome = transactionService.filterIncomeByMonth(filterDateStr);
             model.addAttribute("filteredIncome", filteredIncome);
-            List<Transaction> filteredExpenses = filteredTransactions.stream()
-                    .filter(tx -> Constant.CategoryType.EXPENSE.getValue().equals(tx.getCategory().getType()))
-                    .collect(Collectors.toList());
+            List<Transaction> filteredExpenses = transactionService.filterExpensesByMonth(filterDateStr);
             model.addAttribute("filteredExpenses", filteredExpenses);
         } catch (ParseException e) {
             logger.error(e.getMessage());
         }
         return "fragments/overviewbody :: overviewList";
-    }
-
-    private List<Transaction> filterTransactionsByDate(Model model, String filterDateStr) throws ParseException {
-        Date filterStartDate, filterEndDate;
-        if (!StringUtils.isEmpty(filterDateStr)) {
-            filterStartDate = AppUtil.getStartOfMonth(filterDateStr);
-            filterEndDate = AppUtil.getEndOfMonth(filterDateStr);
-        } else {
-            filterStartDate = AppUtil.getCurrentStartOfMonth();
-            filterEndDate = AppUtil.getCurrentEndOfMonth();
-        }
-        return transactionService.findByUserIdAndDateBetweenOrderByDateDesc(AppUtil.getCurrentUserId(), filterStartDate, filterEndDate);
     }
 
 }
