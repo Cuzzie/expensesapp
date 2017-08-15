@@ -4,13 +4,13 @@ import org.cuzzie.expensesapp.model.MyUserPrincipal;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
-import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -19,27 +19,21 @@ import java.util.stream.Collectors;
 
 public class AppUtil {
 
+    private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+
     public static Date getDate(String dateStr) throws ParseException {
-        return getDate(dateStr, "yyyy-MM-dd");
+        return getDate(dateStr, DEFAULT_DATE_FORMAT);
     }
 
     public static Date getDate(String dateStr, String dateFormat) throws ParseException {
-        return new SimpleDateFormat(dateFormat).parse(dateStr);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        LocalDate parsedDate = LocalDate.parse(dateStr, formatter);
+        return java.sql.Date.valueOf(parsedDate);
     }
 
     public static Date getStartOfMonth(String dateStr) throws ParseException {
-        Date date = null;
-        String[] dateStrArr = dateStr.split("-");
-        if (dateStrArr.length == 2) {
-            int year = Integer.parseInt(dateStrArr[0]);
-            int month = Integer.parseInt(dateStrArr[1]) - 1;
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.YEAR, year);
-            cal.set(Calendar.MONTH, month);
-            cal.set(Calendar.DAY_OF_MONTH, 1);
-            date = cal.getTime();
-        }
-        return date;
+        dateStr += "-01";
+        return getDate(dateStr);
     }
 
     public static Date getEndOfMonth(String dateStr) throws ParseException {
