@@ -6,6 +6,9 @@ import org.cuzzie.expensesapp.repository.TransactionRepository;
 import org.cuzzie.expensesapp.service.TransactionService;
 import org.cuzzie.expensesapp.util.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
@@ -34,6 +37,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    @Cacheable(value = "expensesapp")
     public List<Transaction> findByUserIdAndDateBetweenOrderByDateDesc(int userId, Date startDate, Date endDate) {
         return transactionRepository.findByUserIdAndDateBetweenOrderByDateDesc(userId, startDate, endDate);
     }
@@ -68,11 +72,13 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void saveTransaction(Transaction transaction) {
-        transactionRepository.save(transaction);
+    @CachePut(value = "expensesapp", key = "#result.id")
+    public Transaction saveTransaction(Transaction transaction) {
+        return transactionRepository.save(transaction);
     }
 
     @Override
+    @CacheEvict(value = "expensesapp", key = "#transactionId")
     public void deleteTransaction(int transactionId) {
         transactionRepository.delete(transactionId);
     }

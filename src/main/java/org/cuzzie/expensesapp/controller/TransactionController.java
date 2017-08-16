@@ -45,6 +45,7 @@ public class TransactionController {
             logger.error(AppUtil.compileError(bindingResult));
             return "addnewtransaction";
         }
+        transaction.setUser(AppUtil.getCurrentUser());
         transactionService.saveTransaction(transaction);
         return "redirect:/?success_add=true";
     }
@@ -62,6 +63,7 @@ public class TransactionController {
             logger.error(AppUtil.compileError(bindingResult));
             return "addnewtransaction";
         }
+        transaction.setUser(AppUtil.getCurrentUser());
         transactionService.saveTransaction(transaction);
         return "redirect:/?success_add=true";
     }

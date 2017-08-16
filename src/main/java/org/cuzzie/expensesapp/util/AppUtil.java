@@ -1,6 +1,7 @@
 package org.cuzzie.expensesapp.util;
 
 import org.cuzzie.expensesapp.model.MyUserPrincipal;
+import org.cuzzie.expensesapp.model.User;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,12 +43,9 @@ public class AppUtil {
         if (dateStrArr.length == 2) {
             int year = Integer.parseInt(dateStrArr[0]);
             int month = Integer.parseInt(dateStrArr[1]);
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.YEAR, year);
-            cal.set(Calendar.MONTH, month);
-            cal.set(Calendar.DAY_OF_MONTH, 1);
-            cal.add(Calendar.DATE, -1);
-            date = cal.getTime();
+            LocalDate localDate = LocalDate.of(year, month + 1, 1);
+            localDate = localDate.minusDays(1);
+            date = java.sql.Date.valueOf(localDate);
         }
         return date;
     }
@@ -74,16 +72,21 @@ public class AppUtil {
                 .collect(Collectors.joining(", "));
     }
 
-    public static int getCurrentUserId() {
+    public static User getCurrentUser() {
+        User currentUser = null;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             // Only proceed if user is logged in
             if (!(authentication instanceof AnonymousAuthenticationToken)) {
                 MyUserPrincipal userDetails = (MyUserPrincipal) authentication.getPrincipal();
-                return userDetails.getUser().getId();
+                currentUser = userDetails.getUser();
             }
         }
-        return -1;
+        return currentUser;
+    }
+
+    public static int getCurrentUserId() {
+        return Optional.ofNullable(getCurrentUser()).map(User::getId).orElse(-1);
     }
 
 }

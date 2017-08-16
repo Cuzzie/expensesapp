@@ -25,7 +25,7 @@ public interface TransactionService {
 
     List<Transaction> filterExpensesByMonth(String filterDateStr) throws ParseException;
 
-    void saveTransaction(Transaction transaction);
+    Transaction saveTransaction(Transaction transaction);
 
     void deleteTransaction(int transactionId);
 }
